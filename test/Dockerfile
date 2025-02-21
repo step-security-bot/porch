@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-FROM golang:1.23.5-bookworm AS builder
+FROM golang:1.23.5-bookworm@sha256:9c79a16e024bcfb856b6d063cf7ed9a6257f554466761f5a99b09787d2b55fbd AS builder
 
 WORKDIR /go/src
 
@@ -23,7 +23,7 @@ WORKDIR /go/src
 COPY . .
 RUN cd test; go build -v -o /git-server ./git
 
-FROM debian:bookworm-slim
+FROM debian:bookworm-slim@sha256:40b107342c492725bc7aacbe93a49945445191ae364184a6d24fedb28172f6f7
 RUN apt update && apt install -y ca-certificates && rm -rf /var/lib/apt && rm -rf /var/cache/apt
 COPY --from=builder /git-server /git-server
 ENTRYPOINT ["/git-server", "--port=8080"]

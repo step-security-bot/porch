@@ -1,0 +1,36 @@
+version: 2
+updates:
+  - package-ecosystem: docker
+    directory: /build
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /controllers
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /examples/apps/hello-server
+    schedule:
+      interval: daily
+
+  - package-ecosystem: gomod
+    directory: /examples/apps/hello-server
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /func
+    schedule:
+      interval: daily
+
+  - package-ecosystem: gomod
+    directory: /
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /test
+    schedule:
+      interval: daily

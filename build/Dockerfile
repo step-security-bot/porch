@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-FROM golang:1.23.5-bookworm AS builder
+FROM golang:1.23.5-bookworm@sha256:9c79a16e024bcfb856b6d063cf7ed9a6257f554466761f5a99b09787d2b55fbd AS builder
 
 WORKDIR /go/src
 
@@ -45,7 +45,7 @@ COPY ./func ./func
 
 RUN go build -v -o /porch ./cmd/porch
 
-FROM gcr.io/distroless/static:nonroot
+FROM gcr.io/distroless/static:nonroot@sha256:6ec5aa99dc335666e79dc64e4a6c8b89c33a543a1967f20d360922a80dd21f02
 COPY --from=builder --chown=nonroot:nonroot /porch /home/nonroot/porch
 USER nonroot:nonroot
 ENTRYPOINT ["/home/nonroot/porch"]
